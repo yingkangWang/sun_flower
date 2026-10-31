@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>向阳而生 · 粒子花园</title>
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="ui.css" />
+    <link rel="stylesheet" href="experience.css" />
+    <link rel="stylesheet" href="cinematic.css" />
+    <link rel="stylesheet" href="light-trail.css" />
+    <script defer src="app.bundle.js"></script>
+  </head>
+  <body data-view="opening">
+    <div id="stage" aria-label="金色粒子向日葵与葵仔"></div>
+    <div id="opening-root"></div>
+    <div id="garden-ui" inert aria-hidden="true">
+      <div class="veil"></div>
+      <header>
+        <a class="logo" href="#"
+          ><span>✳</span> 向阳而生 <small>CODE IN BLOOM</small></a
+        >
+        <nav>
+          <button id="returnOpening">返回片头</button
+          ><button class="selected" id="home">向阳花园</button
+          ><button id="demoButton">一键演示</button
+          ><button id="history">回到花海</button
+          ><button id="notes">创作手记 ↗</button>
+        </nav>
+        <span class="anniversary">ZJUT COMPUTING <b>40</b><sup>TH</sup></span>
+      </header>
+      <main>
+        <div class="eyebrow">
+          <i></i> 1986 — 2026 <span>/</span> 四十载代码，一朵花开
+        </div>
+        <h1>让代码成光<br /><em>让热爱生长</em></h1>
+        <div class="rule"></div>
+        <p class="intro">
+          献礼计算机学院办学四十周年<br /><span
+            >和葵仔一起，唤醒属于工大的向阳花海。</span
+          >
+        </p>
+        <div class="buttons">
+          <button id="awaken">汇聚微光 <span>↗</span></button
+          ><button id="time">回到花海 <span>→</span></button>
+        </div>
+        <div class="hint"><span>✧</span> 点击花海，拾取一句祝福</div>
+        <div class="chapter">
+          <span>01 — 03 / 向阳之旅</span
+          ><strong id="chapterTitle">一片花海，万千份热爱。</strong>
+          <p id="chapterText">从一枚闪烁的光标，到向阳盛放的未来。</p>
+        </div>
+      </main>
+      <div class="scene-caption">
+        <span class="tiny-star">✧</span
+        ><span>每一粒微光<br /><b>都有向阳的力量</b></span>
+      </div>
+      <div class="kuizai-label">
+        <span>●</span> 葵仔 <small>你的时光领航员</small>
+      </div>
+      <section class="timeline" aria-label="时光光轨，拖动可往返花海">
+        <button id="play" aria-label="播放或暂停粒子聚合">▶</button>
+        <div class="timeline-title">
+          <span id="phaseName">花海初绽</span><small>GROW WITH THE LIGHT</small>
+        </div>
+        <div class="track">
+          <input
+            id="progress"
+            type="range"
+            min="0"
+            max="1000"
+            value="0"
+            aria-label="时光光轨，向左倒流，向右汇聚"
+          />
+          <div class="years">
+            <span>01 · 花海初绽</span><span>02 · 微光汇聚</span
+            ><span class="active">03 · 葵仔托光</span>
+          </div>
+        </div>
+        <button class="wish" id="wish">留下祝福 <span>↗</span></button>
+      </section>
+      <footer>
+        <span>厚德健行 · 向阳而生</span
+        ><span>浙江工业大学计算机学院办学40周年 · 学校建校73周年</span
+        ><span>拖动时间，往返花海 <b>↔</b></span>
+      </footer>
+      <dialog id="dialog">
+        <button id="close" aria-label="关闭">×</button>
+        <p class="overline">CODE IN BLOOM</p>
+        <h2 id="dialogTitle"></h2>
+        <div id="dialogBody"></div>
+      </dialog>
+      <div id="error" role="status"></div>
+      <aside
+        id="blessingCard"
+        class="blessing-card"
+        hidden
+        aria-labelledby="blessingTitle"
+      >
+        <button id="closeBlessing" aria-label="收起祝福">×</button>
+        <span class="blessing-icon" aria-hidden="true">✧</span>
+        <p id="blessingTitle" class="blessing-overline">一粒星光 · 一份祝福</p>
+        <p id="blessingText" role="status" aria-live="polite"></p>
+        <span class="blessing-dedication">献给计算机学院的四十岁</span>
+        <button id="keepBlessing" class="keep-blessing">带着这句出发 ↗</button>
+      </aside>
+      <div id="clickRipple" class="click-ripple" aria-hidden="true"></div>
+      <aside id="finale" class="finale" hidden aria-labelledby="finaleTitle">
+        <p class="finale-kicker">THIS LIGHT IS YOURS</p>
+        <h2 id="finaleTitle">你留下的话，成为了光。</h2>
+        <p id="finaleWish"></p>
+        <p class="finale-note">献礼计算机学院办学四十周年</p>
+        <div class="finale-actions">
+          <button id="saveCard">保存这束光 ↓</button
+          ><button id="editFinalWish">换一句祝福</button>
+        </div>
+        <p id="saveStatus" role="status" aria-live="polite"></p>
+      </aside>
+      <div
+        id="demoNarration"
+        class="demo-narration"
+        hidden
+        aria-live="polite"
+      ></div>
+      <p
+        id="experienceStatus"
+        class="experience-status"
+        role="status"
+        aria-live="polite"
+      ></p>
+    </div>
+    <noscript>请启用 JavaScript，以进入向阳花海。</noscript>
+  </body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "zjut-code-in-bloom-ui",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js",
+    "build:css": "tailwindcss -i src/theme.css -o theme.css --minify",
+    "build:js": "esbuild src/scene.js --bundle --minify --jsx=automatic --format=iife --legal-comments=eof --outfile=app.bundle.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "three": "0.187.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "lucide-react": "1.65.0",
+    "clsx": "2.1.1",
+    "tailwind-merge": "3.7.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2",
+    "tailwindcss": "4.3.3",
+    "@tailwindcss/cli": "4.3.3",
+    "typescript": "7.0.2",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0"
+  }
+}

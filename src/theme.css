@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@source "./opening.tsx";
+@source "./components/**/*.tsx";
+
+/* shadcn semantic tokens; all fonts/assets are local/system for offline judging. */
+:root {
+  --background: #f7f7f2;
+  --foreground: #14202a;
+  --primary: #d9b36b;
+  --primary-foreground: #151e25;
+  --border: #ffffff38;
+  --ring: #f3d596;
+  --radius: 1rem;
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --font-sans: "Inter", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+
+.interactive-hover-button {
+  min-height: 54px;
+  min-width: 174px;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+.interactive-hover-button:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 6px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .interactive-hover-button *,
+  .interactive-hover-button {
+    transition: none !important;
+  }
+}

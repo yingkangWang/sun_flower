@@ -1,0 +1,241 @@
+/* A light trail in the scene: no player card, a 44px input hit area around a 1px line. */
+#garden-ui .timeline {
+  left: max(5vw, calc((100vw - 1060px) / 2));
+  right: max(5vw, calc((100vw - 1060px) / 2));
+  bottom: 52px;
+  height: 58px;
+  padding: 0;
+  gap: 19px;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  backdrop-filter: none;
+  box-shadow: none;
+  overflow: visible;
+  transition: opacity 0.35s ease;
+}
+#garden-ui .timeline::before {
+  content: "";
+  position: absolute;
+  inset: -14px -34px;
+  z-index: -1;
+  background: radial-gradient(ellipse, #07131c98, transparent 72%);
+  pointer-events: none;
+}
+#garden-ui #play {
+  width: 32px;
+  height: 44px;
+  min-width: 32px;
+  color: #d3d8cf;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  opacity: 0.7;
+  font-size: 10px;
+  transition:
+    opacity 0.25s,
+    color 0.25s;
+}
+#garden-ui #play:hover,
+#garden-ui #play:focus-visible {
+  opacity: 1;
+  color: #ffe2a3;
+}
+#garden-ui .timeline-title {
+  font-size: 10px;
+  min-width: 118px;
+  letter-spacing: 1.4px;
+  color: #becac9;
+}
+#garden-ui .timeline-title small {
+  display: none;
+}
+#garden-ui .track {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+#garden-ui #progress {
+  --light-progress: 0%;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 44px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  outline: none;
+  cursor: ew-resize;
+  touch-action: pan-y;
+}
+#garden-ui #progress::-webkit-slider-runnable-track {
+  height: 1px;
+  border: 0;
+  background: linear-gradient(
+    to right,
+    #d9c28d 0%,
+    #d9c28d var(--light-progress),
+    #b8cbd24d var(--light-progress),
+    #b8cbd24d 100%
+  );
+}
+#garden-ui #progress::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 5px;
+  height: 5px;
+  margin-top: -2px;
+  border: 0;
+  border-radius: 50%;
+  background: #f4dfb0;
+  box-shadow: 0 0 8px 2px #e7c57275;
+  transition:
+    box-shadow 0.25s,
+    transform 0.25s;
+}
+#garden-ui #progress::-moz-range-track {
+  height: 1px;
+  background: #b8cbd24d;
+  border: 0;
+}
+#garden-ui #progress::-moz-range-progress {
+  height: 1px;
+  background: #d9c28d;
+}
+#garden-ui #progress::-moz-range-thumb {
+  width: 5px;
+  height: 5px;
+  border: 0;
+  border-radius: 50%;
+  background: #f4dfb0;
+  box-shadow: 0 0 8px 2px #e7c57275;
+}
+#garden-ui #progress:hover::-webkit-slider-thumb,
+#garden-ui #progress:focus-visible::-webkit-slider-thumb {
+  transform: scale(1.5);
+  box-shadow: 0 0 12px 3px #e7c57290;
+}
+#garden-ui #progress:focus-visible {
+  outline: 1px solid #e3cf8c8c;
+  outline-offset: 0;
+  border-radius: 4px;
+}
+#garden-ui .years {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 33px;
+  margin: 0;
+  font:
+    8px "Inter",
+    "Microsoft YaHei",
+    sans-serif;
+  letter-spacing: 1px;
+  color: #a7b8bc;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s;
+  pointer-events: none;
+}
+#garden-ui .timeline:hover .years,
+#garden-ui .timeline:focus-within .years {
+  opacity: 0.8;
+  transform: translateY(0);
+}
+#garden-ui .wish {
+  min-height: 44px;
+  padding: 0 0 0 9px;
+  margin-left: 0;
+  border: 0;
+  color: #c9d2ca;
+  font-size: 10px;
+  letter-spacing: 1px;
+  background: none;
+}
+#garden-ui .wish span {
+  margin-left: 9px;
+  color: #c3ad79;
+}
+#garden-ui .experience-status {
+  bottom: 122px;
+}
+.opening-screen.is-leaving .opening-shade,
+.opening-screen.is-leaving .film-grain {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+body[data-entry-transition="true"] #opening-root {
+  pointer-events: none;
+}
+body[data-entry-transition="true"] .is-leaving .entry-reveal {
+  opacity: 0;
+  transform: translateY(-10px);
+  filter: blur(5px);
+  transition:
+    opacity 0.4s ease,
+    transform 0.5s ease,
+    filter 0.5s;
+}
+/* The scene itself already resolves into the field; do not crossfade a dark layer over the landing. */
+body[data-view="garden"] #opening-root {
+  transition: none;
+}
+@media (max-width: 680px) {
+  #garden-ui .timeline {
+    left: 6%;
+    right: 6%;
+    bottom: 34px;
+    height: 76px;
+    padding: 0;
+    gap: 0 8px;
+    display: grid;
+    grid-template-columns: 32px minmax(0, 1fr) auto;
+    grid-template-rows: 32px 44px;
+  }
+  #garden-ui #play {
+    grid-row: 1;
+    grid-column: 1;
+    height: 32px;
+    font-size: 9px;
+  }
+  #garden-ui .timeline-title {
+    grid-row: 1;
+    grid-column: 2;
+    font-size: 9px;
+    min-width: 0;
+  }
+  #garden-ui .wish {
+    grid-row: 1;
+    grid-column: 3;
+    font-size: 9px;
+    min-height: 32px;
+  }
+  #garden-ui .track {
+    grid-row: 2;
+    grid-column: 1 / -1;
+    order: 0;
+    min-width: 0;
+  }
+  #garden-ui .years {
+    font-size: 7px;
+    letter-spacing: 0.3px;
+  }
+  #garden-ui .timeline .years {
+    opacity: 0.6;
+    transform: none;
+  }
+  #garden-ui .finale {
+    bottom: 129px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #garden-ui .timeline *,
+  .opening-screen.is-leaving * {
+    transition: none !important;
+  }
+}

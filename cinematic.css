@@ -1,0 +1,758 @@
+/* Film title / gallery UI. Deliberately scoped to avoid overriding reusable Tailwind components. */
+html,
+body {
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  height: 100svh;
+  color: #f7f7f3;
+  font-family: "Inter", "Segoe UI", "Microsoft YaHei", sans-serif;
+}
+#stage,
+#garden-ui {
+  position: fixed;
+  inset: 0;
+}
+#garden-ui {
+  z-index: 2;
+  transition: opacity 0.7s ease;
+  pointer-events: none;
+}
+#garden-ui header,
+#garden-ui button,
+#garden-ui input,
+#garden-ui a,
+#garden-ui dialog,
+#garden-ui .blessing-card,
+#garden-ui .finale {
+  pointer-events: auto;
+}
+body[data-view="opening"] #garden-ui {
+  opacity: 0;
+  visibility: hidden;
+}
+#opening-root {
+  position: fixed;
+  inset: 0;
+  z-index: 12;
+  transition:
+    opacity 0.65s ease,
+    visibility 0.65s;
+}
+body[data-view="garden"] #opening-root {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.opening-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 3.4vw;
+  isolation: isolate;
+  overflow: hidden;
+}
+.opening-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #0b142654 0%, transparent 65%),
+    linear-gradient(0deg, #09121cdb 0%, #0d17212e 42%, transparent 75%);
+}
+.film-grain {
+  position: absolute;
+  inset: -50%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.09;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.6' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.opening-nav {
+  height: 96px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ffffff26;
+}
+.opening-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #fafaf7;
+  text-decoration: none;
+}
+.opening-brand > svg {
+  color: #e7d3a5;
+}
+.opening-brand > span {
+  font-size: 19px;
+  letter-spacing: 3px;
+  font-weight: 500;
+}
+.opening-brand small {
+  display: block;
+  margin-top: 3px;
+  color: #c5cbd0;
+  font-size: 8px;
+  letter-spacing: 2.4px;
+  font-weight: 400;
+}
+.opening-occasion {
+  text-align: center;
+  color: #e0e4e6;
+  font-size: 11px;
+  letter-spacing: 2px;
+  line-height: 1.9;
+}
+.opening-occasion > span {
+  display: block;
+  color: #a8b2bc;
+  font-size: 9px;
+}
+.edition {
+  color: #eef0ed;
+  font-size: 10px;
+  letter-spacing: 1.8px;
+}
+.edition span {
+  margin: 0 12px;
+  color: #9ba9b6;
+}
+.opening-topline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 29px;
+}
+.opening-topline > span {
+  color: #d9dfe1;
+  font-size: 9px;
+  letter-spacing: 1.9px;
+  line-height: 2.2;
+}
+.opening-topline p {
+  margin: 0;
+  color: #f1f0e9;
+  font-size: 15px;
+  line-height: 1.95;
+  letter-spacing: 1.8px;
+  text-align: right;
+}
+.opening-topline p span {
+  color: #bac1c6;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+.macro-label {
+  position: absolute;
+  left: 78%;
+  top: 49%;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  pointer-events: none;
+}
+.macro-cross {
+  font-size: 26px;
+  color: #ead6ad;
+  font-weight: 200;
+}
+.macro-label > span:last-child {
+  font-size: 10px;
+  color: #efeadb;
+  letter-spacing: 2px;
+}
+.macro-label small {
+  display: block;
+  font-size: 7px;
+  color: #a6b2b9;
+  letter-spacing: 1.4px;
+  margin-top: 7px;
+}
+.opening-bottom {
+  position: absolute;
+  bottom: 105px;
+  left: 3.4vw;
+  right: 3.4vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+}
+.opening-copy {
+  max-width: 710px;
+}
+.opening-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 12px;
+  margin: 0 0 24px;
+  border-left: 2px solid #e2d6b9;
+  background: #e8ecf011;
+  backdrop-filter: blur(12px);
+  color: #d8dcda;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.opening-badge > span:first-child {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #dcc185;
+}
+.badge-slash {
+  color: #88929a;
+  margin: 0 2px;
+}
+.opening-copy h1 {
+  position: static;
+  margin: 0 0 29px;
+  color: #f4f2eb;
+  font-family: "Inter", "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-size: clamp(44px, 5.2vw, 82px);
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: -2px;
+  text-shadow: 0 3px 40px #0b152880;
+}
+.opening-copy h1 br {
+  display: block;
+}
+.opening-screen .film-grain {
+  opacity: 0.035;
+}
+.opening-copy h1 > span {
+  color: #c9caca;
+}
+.opening-actions {
+  display: flex;
+  gap: 23px;
+  align-items: center;
+}
+.opening-invitation {
+  color: #e9e8e0;
+  font-size: 11px;
+  letter-spacing: 1px;
+  line-height: 1.9;
+}
+.opening-invitation > span {
+  color: #9ca7af;
+  font-size: 10px;
+}
+.opening-dedication {
+  width: 276px;
+  padding: 20px 22px;
+  border: 1px solid #ffffff24;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #a8b5c612, #dbe2df08);
+  backdrop-filter: blur(16px);
+}
+.dedication-line {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 8px;
+  color: #bec7ca;
+  letter-spacing: 1.4px;
+}
+.opening-dedication p {
+  font-size: 18px;
+  color: #efeee7;
+  line-height: 1.8;
+  margin: 18px 0 22px;
+  letter-spacing: 1px;
+}
+.opening-dedication > div {
+  display: flex;
+  gap: 20px;
+  border-top: 1px solid #ffffff21;
+  padding-top: 15px;
+  color: #a8b0b6;
+  font-size: 8px;
+}
+.opening-dedication b {
+  font-size: 19px;
+  color: #e5d2ab;
+  font-weight: 400;
+  margin: 0 3px;
+}
+.opening-foot {
+  position: absolute;
+  bottom: 26px;
+  left: 3.4vw;
+  right: 3.4vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #ffffff26;
+  padding-top: 20px;
+  font-size: 8px;
+  color: #a0acb5;
+  letter-spacing: 1.3px;
+}
+.opening-foot > span:nth-child(2) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: #c5cccd;
+}
+.entry-reveal {
+  animation: entry-reveal 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.opening-topline {
+  animation-delay: 0.15s;
+}
+.opening-badge {
+  animation-delay: 0.25s;
+}
+.opening-copy h1 {
+  animation-delay: 0.35s;
+}
+.opening-actions {
+  animation-delay: 0.48s;
+}
+.opening-dedication {
+  animation-delay: 0.6s;
+}
+.macro-label,
+.opening-foot {
+  animation-delay: 0.7s;
+}
+.is-leaving .entry-reveal {
+  animation: none;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+@keyframes entry-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* The experience stays full-screen. Navigation and controls use the same quiet glass material. */
+#garden-ui header {
+  height: 82px;
+  padding: 0 3.4vw;
+  border-bottom: 1px solid #ffffff24;
+  background: linear-gradient(#111e2c88, transparent);
+}
+#garden-ui .logo {
+  font-size: 18px;
+  color: #f4f1e9;
+  gap: 10px;
+  letter-spacing: 2px;
+}
+#garden-ui .logo > span {
+  color: #e4d2a9;
+  font-size: 29px;
+}
+#garden-ui .logo small {
+  color: #a9b6be;
+  letter-spacing: 1.5px;
+}
+#garden-ui nav {
+  gap: 27px;
+}
+#garden-ui nav button {
+  color: #c5d0d5;
+  font-size: 10px;
+  letter-spacing: 1px;
+  transition: color 0.25s;
+  padding: 15px 0;
+}
+#garden-ui nav button:hover,
+#garden-ui nav .selected {
+  color: #fff9eb;
+}
+#garden-ui nav .selected:after {
+  background: #d9c28e;
+}
+#garden-ui .anniversary {
+  font-size: 8px;
+  color: #a6b5bf;
+}
+#garden-ui .anniversary b {
+  color: #e2cfaa;
+  font-weight: 400;
+}
+#garden-ui main {
+  top: 107px;
+  padding: 0;
+}
+#garden-ui .eyebrow {
+  color: #a8b9bf;
+  letter-spacing: 2px;
+  font-size: 8px;
+}
+#garden-ui h1 {
+  color: #e9e9e1;
+  font-family: "Inter", "Segoe UI", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+  font-size: 26px;
+  letter-spacing: 1px;
+  margin: 13px 0 7px;
+}
+#garden-ui h1 em {
+  color: #bac2bf;
+  font-style: normal;
+}
+#garden-ui .hint {
+  color: #c8cecb;
+  font-size: 9px;
+  border-color: #ffffff21;
+  border-radius: 4px;
+  background: #b5c0cb0c;
+  backdrop-filter: blur(12px);
+}
+#garden-ui .buttons button {
+  min-width: 116px;
+  padding: 11px 17px;
+  border-radius: 30px;
+  color: #172832;
+  background: #ecece3;
+  border: 1px solid #ffffff37;
+  font-size: 10px;
+  box-shadow: none;
+}
+#garden-ui .buttons button + button {
+  color: #d6dfdf;
+  background: #bccbdd0f;
+  backdrop-filter: blur(12px);
+}
+#garden-ui .timeline {
+  border-radius: 12px;
+  border: 1px solid #ffffff26;
+  background: linear-gradient(110deg, #becdd918, #8ca3ba0b);
+  box-shadow: 0 12px 40px #0002;
+  backdrop-filter: blur(20px);
+}
+#garden-ui .timeline-title {
+  color: #e1e4df;
+}
+#garden-ui .timeline-title small,
+#garden-ui .years {
+  color: #9bafb9;
+}
+#garden-ui .years .active {
+  color: #e3cf9d;
+}
+#garden-ui #play {
+  color: #e6d6b2;
+  background: #e4e8e918;
+  border: 1px solid #ffffff20;
+  border-radius: 50%;
+}
+#garden-ui #progress {
+  accent-color: #dbc391;
+}
+#garden-ui .wish {
+  color: #e5e4d9;
+  border-color: #ffffff29;
+}
+#garden-ui footer {
+  color: #90a6b1;
+  font-size: 8px;
+}
+#garden-ui .blessing-card,
+#garden-ui .finale {
+  background: linear-gradient(130deg, #233440e8, #132331eb);
+  border: 1px solid #ffffff2e;
+  box-shadow: 0 20px 80px #0003;
+  border-radius: 12px;
+  backdrop-filter: blur(24px);
+}
+#garden-ui .blessing-overline,
+#garden-ui .finale-kicker {
+  color: #b3c1c5;
+}
+#garden-ui #blessingText,
+#garden-ui #finaleWish {
+  font-family: "Microsoft YaHei", sans-serif;
+  color: #f0e9d5;
+  font-size: 19px;
+  line-height: 1.9;
+}
+#garden-ui .finale h2 {
+  font-family: "Microsoft YaHei", sans-serif;
+  color: #e1e5df;
+  font-size: 15px;
+}
+#garden-ui .finale #saveCard {
+  color: #1d2b31;
+  background: #e7e6dc;
+  border-radius: 24px;
+}
+#garden-ui .finale #editFinalWish {
+  color: #bdcaca;
+}
+#garden-ui dialog {
+  border: 1px solid #ffffff30;
+  background: #162734ed;
+  color: #e2e8e7;
+  border-radius: 12px;
+  backdrop-filter: blur(25px);
+}
+#garden-ui dialog h2 {
+  color: #e8e7dc;
+}
+#garden-ui dialog input,
+#garden-ui dialog textarea {
+  color: #ecf0e8;
+  background: #ffffff09;
+  border: 1px solid #ffffff30;
+  border-radius: 6px;
+}
+#garden-ui dialog button.submit {
+  background: #e7e6dc;
+  color: #162b35;
+  border-radius: 24px;
+}
+#garden-ui .veil {
+  background: radial-gradient(
+    ellipse at 50% 45%,
+    transparent 50%,
+    #07121e40 100%
+  );
+}
+@media (min-width: 1700px) {
+  #garden-ui main {
+    padding: 0;
+  }
+}
+@media (max-width: 1100px) {
+  #garden-ui .logo small,
+  #garden-ui .anniversary {
+    display: none;
+  }
+  #garden-ui nav {
+    gap: 20px;
+  }
+  .opening-copy h1 {
+    font-size: clamp(43px, 6vw, 64px);
+  }
+  .opening-dedication {
+    width: 245px;
+  }
+  .opening-invitation {
+    max-width: 190px;
+  }
+  .opening-invitation > span {
+    font-size: 9px;
+  }
+}
+@media (max-width: 680px) {
+  .opening-screen {
+    padding: 0 6%;
+  }
+  .opening-nav {
+    height: 78px;
+  }
+  .opening-brand > span {
+    font-size: 16px;
+  }
+  .opening-brand svg {
+    width: 23px;
+  }
+  .opening-brand small {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+  .opening-occasion {
+    display: none;
+  }
+  .edition {
+    font-size: 8px;
+    letter-spacing: 1px;
+  }
+  .edition span {
+    margin: 0 5px;
+  }
+  .opening-topline {
+    padding-top: 20px;
+  }
+  .opening-topline > span {
+    font-size: 7px;
+    line-height: 2.1;
+    letter-spacing: 1px;
+  }
+  .opening-topline p {
+    display: none;
+  }
+  .opening-topline p span {
+    font-size: 8px;
+  }
+  .opening-bottom {
+    left: 6%;
+    right: 6%;
+    bottom: 90px;
+  }
+  .opening-copy {
+    width: 100%;
+  }
+  .opening-badge {
+    font-size: 8px;
+    margin-bottom: 19px;
+    letter-spacing: 1px;
+  }
+  .opening-copy h1 {
+    font-size: clamp(37px, 10vw, 55px);
+    line-height: 1.3;
+    letter-spacing: -1.2px;
+    margin-bottom: 25px;
+  }
+  .opening-actions {
+    gap: 15px;
+  }
+  .interactive-hover-button {
+    min-width: 144px;
+    min-height: 50px;
+    font-size: 12px;
+    padding: 14px 22px;
+  }
+  .opening-invitation {
+    font-size: 9px;
+    letter-spacing: 0.3px;
+    max-width: 150px;
+  }
+  .opening-invitation > span {
+    font-size: 8px;
+  }
+  .opening-dedication {
+    display: none;
+  }
+  .macro-label {
+    left: auto;
+    right: 9%;
+    top: 56%;
+  }
+  .macro-label > span:last-child {
+    font-size: 8px;
+  }
+  .macro-label small {
+    font-size: 6px;
+  }
+  .opening-foot {
+    left: 6%;
+    right: 6%;
+    bottom: 22px;
+    padding-top: 17px;
+    font-size: 7px;
+    letter-spacing: 0.5px;
+  }
+  .opening-foot > span:nth-child(2) {
+    font-size: 7px;
+    gap: 6px;
+  }
+  .opening-foot > span:last-child {
+    display: none;
+  }
+  #garden-ui header {
+    height: 72px;
+    padding: 0 5%;
+  }
+  #garden-ui .logo {
+    font-size: 16px;
+    gap: 6px;
+    letter-spacing: 1px;
+  }
+  #garden-ui nav {
+    gap: 13px;
+  }
+  #garden-ui nav button {
+    font-size: 9px;
+    letter-spacing: 0;
+  }
+  #garden-ui nav #returnOpening {
+    display: block;
+  }
+  #garden-ui nav #home,
+  #garden-ui nav #notes {
+    display: none;
+  }
+  #garden-ui main {
+    top: 94px;
+    padding: 0;
+  }
+  #garden-ui h1 {
+    font-size: 21px;
+  }
+  #garden-ui .eyebrow {
+    font-size: 7px;
+    letter-spacing: 0.7px;
+  }
+  #garden-ui .buttons button {
+    padding: 9px 14px;
+    min-width: 103px;
+    font-size: 9px;
+  }
+  #garden-ui .hint {
+    font-size: 8px;
+  }
+  #garden-ui .timeline {
+    padding: 13px;
+  }
+  #garden-ui footer {
+    font-size: 7px;
+  }
+  #garden-ui .finale #finaleWish {
+    font-size: 17px;
+  }
+}
+@media (max-height: 650px) and (min-width: 681px) {
+  .opening-nav {
+    height: 70px;
+  }
+  .opening-topline {
+    padding-top: 18px;
+  }
+  .opening-bottom {
+    bottom: 80px;
+  }
+  .opening-copy h1 {
+    font-size: 43px;
+    margin-bottom: 17px;
+  }
+  .opening-badge {
+    margin-bottom: 14px;
+  }
+  .opening-foot {
+    bottom: 16px;
+    padding-top: 13px;
+  }
+}
+@media (max-height: 700px) and (max-width: 680px) {
+  .opening-topline p,
+  .macro-label {
+    display: none;
+  }
+  .opening-copy h1 {
+    font-size: 35px;
+    margin-bottom: 19px;
+  }
+  .opening-badge {
+    margin-bottom: 15px;
+  }
+  .opening-bottom {
+    bottom: 77px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .entry-reveal {
+    animation: none;
+  }
+  #opening-root,
+  #garden-ui {
+    transition: none;
+  }
+}
